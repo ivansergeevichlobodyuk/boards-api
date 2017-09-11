@@ -23,7 +23,7 @@ class TaskController extends FOSRestController
      */
     public function getTasksByBoardId($id)
     {
-        $restResult = $this->getDoctrine()->getRepository('AppBundle:Tasks')->find($id);
+        $restResult = $this->getDoctrine()->getRepository('AppBundle:Tasks')->findBy(array('board' => $id));
         if ($restResult === null) {
             return new View("there are no board id = {$id} exist", Response::HTTP_NOT_FOUND);
         }
@@ -39,7 +39,7 @@ class TaskController extends FOSRestController
     {
         $restResult = $this->getDoctrine()->getRepository('AppBundle:Tasks')
             ->findTaskByBoardIdTaskId($boardId, $taskId);
-        if ($restResult === null) {
+        if (empty($restResult)) {
             return new View("there are no task with id $taskId under board with $boardId exist", Response::HTTP_NOT_FOUND);
         }
         return $restResult;

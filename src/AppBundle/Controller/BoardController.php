@@ -31,7 +31,7 @@ class BoardController extends FOSRestController
     }
 
     /**
-     * @Rest\Get("/boards/{id}")
+     * @Rest\Get("/boards/{id}/")
      */
     public function getBoardById($id)
     {

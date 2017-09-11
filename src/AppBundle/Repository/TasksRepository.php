@@ -1,4 +1,6 @@
 <?php
+namespace AppBundle\Repository;
+
 
 use Doctrine\ORM\Query;
 
