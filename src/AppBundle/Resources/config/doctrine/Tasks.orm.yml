@@ -1,0 +1,62 @@
+AppBundle\Entity\Tasks:
+    type: entity
+    table: tasks
+    indexes:
+        board_id:
+            columns:
+                - board_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        taskName:
+            type: string
+            nullable: false
+            length: 45
+            options:
+                fixed: false
+            column: task_name
+        taskType:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: task_type
+        title:
+            type: string
+            nullable: false
+            length: 40
+            options:
+                fixed: false
+        introText:
+            type: string
+            nullable: false
+            length: 45
+            options:
+                fixed: false
+            column: intro_text
+        fullText:
+            type: string
+            nullable: false
+            length: 45
+            options:
+                fixed: false
+            column: full_text
+    manyToOne:
+        board:
+            targetEntity: Boards
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                board_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

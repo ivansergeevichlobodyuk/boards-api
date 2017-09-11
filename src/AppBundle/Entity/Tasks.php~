@@ -1,0 +1,71 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Tasks
+ *
+ * @ORM\Table(name="tasks", indexes={@ORM\Index(name="board_id", columns={"board_id"})})
+ * @ORM\Entity
+ */
+class Tasks
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="task_name", type="string", length=45, nullable=false)
+     */
+    private $taskName;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="task_type", type="integer", nullable=false)
+     */
+    private $taskType;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=40, nullable=false)
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="intro_text", type="string", length=45, nullable=false)
+     */
+    private $introText;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="full_text", type="string", length=45, nullable=false)
+     */
+    private $fullText;
+
+    /**
+     * @var \AppBundle\Entity\Boards
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Boards")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="board_id", referencedColumnName="id")
+     * })
+     */
+    private $board;
+
+
+}
+
