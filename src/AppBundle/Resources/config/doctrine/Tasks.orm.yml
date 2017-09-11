@@ -60,3 +60,4 @@ AppBundle\Entity\Tasks:
                     referencedColumnName: id
             orphanRemoval: false
     lifecycleCallbacks: {  }
+    repositoryClass: AppBundle\Repository\TasksRepository
