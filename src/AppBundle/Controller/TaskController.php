@@ -19,7 +19,9 @@ use AppBundle\Entity\User;
 class TaskController extends FOSRestController
 {
     /**
-     * @Rest\Get("/boards/{id}/tasks/")
+     * Gets board's tasks
+     *
+     * @Rest\Get("/api/boards/{id}/tasks/")
      */
     public function getTasksByBoardId($id)
     {
@@ -31,9 +33,9 @@ class TaskController extends FOSRestController
     }
 
     /**
-     * Gets for one page
+     * Gets task on board id
      *
-     * @Rest\Get("/boards/{boardId}/tasks/{taskId}")
+     * @Rest\Get("/api/boards/{boardId}/tasks/{taskId}")
      */
     public function getTasksById($boardId, $taskId)
     {
@@ -42,6 +44,7 @@ class TaskController extends FOSRestController
         if (empty($restResult)) {
             return new View("there are no task with id $taskId under board with $boardId exist", Response::HTTP_NOT_FOUND);
         }
+
         return $restResult;
     }
 

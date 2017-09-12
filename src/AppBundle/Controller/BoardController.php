@@ -19,19 +19,20 @@ use AppBundle\Entity\User;
 class BoardController extends FOSRestController
 {
     /**
-     * @Rest\Get("/boards")
+     * @Rest\Get("/api/boards/")
      */
     public function getBoards()
     {
-        $restresult = $this->getDoctrine()->getRepository('AppBundle:Boards')->findAll();
+        $restresult = $this->getDoctrine()->getRepository('AppBundle:Boards')->findAllBoards();
         if ($restresult === null) {
             return new View("there are no users exist", Response::HTTP_NOT_FOUND);
         }
+
         return $restresult;
     }
 
     /**
-     * @Rest\Get("/boards/{id}/")
+     * @Rest\Get("/api/boards/{id}/")
      */
     public function getBoardById($id)
     {

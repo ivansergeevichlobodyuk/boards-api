@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Boards
  *
  * @ORM\Table(name="boards")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TasksRepository")
  */
 class Boards
 {
