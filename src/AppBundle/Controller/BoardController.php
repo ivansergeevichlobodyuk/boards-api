@@ -27,7 +27,7 @@ class BoardController extends FOSRestController
         if ($restresult === null) {
             return new View("there are no users exist", Response::HTTP_NOT_FOUND);
         }
-
+       // echo "<pre>"; print_r($restresult); die;
         return $restresult;
     }
 
