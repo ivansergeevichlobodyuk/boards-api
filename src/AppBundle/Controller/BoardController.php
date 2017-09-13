@@ -15,8 +15,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
 use AppBundle\Entity\Boards;
+use AppBundle\Entity\EmberDataSerializerAdapter\BoardsAdapter;
 
-class BoardController extends FOSRestController
+class BoardController extends Controller
 {
 
     /**
@@ -48,7 +49,21 @@ class BoardController extends FOSRestController
      */
     public function getBoards()
     {
-        $restresult = $this->getDoctrine()->getRepository('AppBundle:Boards')->findAllBoards();
+//        $restresult = $this->getDoctrine()->getRepository('AppBundle:Boards')->findAllBoards();
+        $restresult = $this->getDoctrine()->getRepository('AppBundle:Boards')->findAll();
+
+        $emberDataSerializerManager = $this->get('unique_libs.ember_data_serializer.manager');
+        $serializedArray = $emberDataSerializerManager->format($restresult, BoardsAdapter::MODEL_NAME_PLURAL);
+//
+
+
+        echo "serialized Array <pre>";
+            print_r($serializedArray);
+        echo "</pre>";
+        die;
+
+//        $serialized = $emberDataSerializerManager->format($users, UserAdapter::MODEL_NAME_PLURAL);
+
         if ($restresult === null) {
             return new View("there are no users exist", Response::HTTP_NOT_FOUND);
         }

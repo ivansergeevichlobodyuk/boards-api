@@ -4,13 +4,15 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use UniqueLibs\EmberDataSerializerBundle\Interfaces\EmberDataSerializableInterface;
+
 /**
  * Tasks
  *
  * @ORM\Table(name="tasks", indexes={@ORM\Index(name="board_id", columns={"board_id"})})
  * @ORM\Entity(repositoryClass="AppBundle\Repository\TasksRepository")
  */
-class Tasks
+class Tasks implements EmberDataSerializableInterface
 {
     /**
      * @var integer
@@ -221,4 +223,15 @@ class Tasks
     {
         return $this->board;
     }
+
+    /**
+     * Get ember data serializer
+     *
+     * @return string
+     */
+    public function getEmberDataSerializerAdapterServiceName()
+    {
+        return 'appbundle.ember_data_serializer_adapter.tasks';
+    }
+
 }

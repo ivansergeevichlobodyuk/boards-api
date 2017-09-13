@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "187523eb09b2543e9dd8a2f66782af44",
+    "content-hash": "fc20c67b625adc45e3336d6124610b69",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -2750,6 +2750,58 @@
                 "templating"
             ],
             "time": "2017-07-04T13:19:31+00:00"
+        },
+        {
+            "name": "uniquelibs/ember-data-serializer-bundle",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/UniqueLibs/ember-data-serializer-bundle.git",
+                "reference": "75619f286afd93c1d86dc3e7174dda84911dae84"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/UniqueLibs/ember-data-serializer-bundle/zipball/75619f286afd93c1d86dc3e7174dda84911dae84",
+                "reference": "75619f286afd93c1d86dc3e7174dda84911dae84",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": "~2.3|~3.0"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "~1.2",
+                "phpunit/phpunit": "~4.6",
+                "symfony-cmf/testing": "1.3.*"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "UniqueLibs\\EmberDataSerializerBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marvin Rind",
+                    "email": "kontakt@marvinrind.de"
+                },
+                {
+                    "name": "Unique Libs Community",
+                    "homepage": "https://github.com/UniqueLibs/ember-data-serializer-bundle/contributors"
+                }
+            ],
+            "description": "A powerful symfony bundle to create secure and flexible ember data rest apis.",
+            "homepage": "https://github.com/UniqueLibs",
+            "keywords": [
+                "api",
+                "ember",
+                "rest"
+            ],
+            "time": "2016-05-28T08:57:25+00:00"
         },
         {
             "name": "willdurand/jsonp-callback-validator",

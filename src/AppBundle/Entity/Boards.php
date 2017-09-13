@@ -3,14 +3,15 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use UniqueLibs\EmberDataSerializerBundle\Interfaces\EmberDataSerializableInterface;
 
 /**
  * Boards
  *
  * @ORM\Table(name="boards")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\TasksRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\BoardsRepository")
  */
-class Boards
+class Boards implements EmberDataSerializableInterface
 {
     /**
      * @var integer
@@ -94,4 +95,15 @@ class Boards
     {
         return $this->count;
     }
+
+    /**
+     * Get ember data serializer
+     *
+     * @return string
+     */
+    public function getEmberDataSerializerAdapterServiceName()
+    {
+        return 'appbundle.ember_data_serializer_adapter.boards';
+    }
+
 }

@@ -4,6 +4,11 @@ parameters:
     #parameter_name: value
 
 services:
+    appbundle.ember_data_serializer_adapter.boards:
+        class: AppBundle\Entity\EmberDataSerializerAdapter\BoardsAdapter
+    appbundle.ember_data_serializer_adapter.tasks:
+        class: AppBundle\Entity\EmberDataSerializerAdapter\TasksAdapter
+
     # default configuration for services in *this* file
     _defaults:
         # automatically injects dependencies in your services
