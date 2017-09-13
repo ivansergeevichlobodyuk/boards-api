@@ -48,4 +48,18 @@ class BoardsRepository extends \Doctrine\ORM\EntityRepository
         $response['board'] = array_values($response['board']);
          return $response;
     }
+
+    /**
+     * Finds board by id
+     *
+     * @param $id
+     * @return null|object
+     */
+    public function findBoardById($id){
+
+        $item = $this->find($id);
+        $data = array( 'board' => array( 'id' => $item->getId(), 'name' => $item->getName(), 'count' => $item->getCount() ) );
+        return $data;
+    }
+
 }
