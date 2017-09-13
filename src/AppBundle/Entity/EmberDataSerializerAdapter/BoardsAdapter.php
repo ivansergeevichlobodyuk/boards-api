@@ -34,7 +34,8 @@ class BoardsAdapter implements EmberDataSerializerAdapterInterface
             'id' => array($object->getId(), false),
             'name' => array($object->getName(), false),
             'count' => array($object->getCount(), false),
-            'relations' => array($object)
+            'relations' => array($object->getTasks(), false),
+
         );
     }
 
