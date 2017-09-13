@@ -29,12 +29,12 @@ class BoardsAdapter implements EmberDataSerializerAdapterInterface
      */
     public function getData(EmberDataSerializableInterface $object)
     {
-        echo "<pre>"; print_r($object); die;
         /** @var User $object */
         return array(
             'id' => array($object->getId(), false),
             'name' => array($object->getName(), false),
-            'count' => array($object->getCount(), false)
+            'count' => array($object->getCount(), false),
+            'relations' => array($object)
         );
     }
 

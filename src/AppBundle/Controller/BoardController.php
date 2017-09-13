@@ -50,7 +50,8 @@ class BoardController extends FOSRestController
     public function getBoards()
     {
 //        $restresult = $this->getDoctrine()->getRepository('AppBundle:Boards')->findAllBoards();
-        $restresult = $this->getDoctrine()->getRepository('AppBundle:Boards')->findAll();
+        $restresult = $this->getDoctrine()->getRepository('AppBundle:Boards')->findAllBoards();
+        //echo "<pre>"; print_r($restresult); die;
 
         $emberDataSerializerManager = $this->get('unique_libs.ember_data_serializer.manager');
         $serializedArray = $emberDataSerializerManager->format($restresult, BoardsAdapter::MODEL_NAME_PLURAL);

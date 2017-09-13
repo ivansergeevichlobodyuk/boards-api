@@ -2,41 +2,38 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use UniqueLibs\EmberDataSerializerBundle\Interfaces\EmberDataSerializableInterface;
-
 /**
  * Boards
- *
- * @ORM\Table(name="boards")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\BoardsRepository")
  */
-class Boards implements EmberDataSerializableInterface
+class Boards
 {
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=45, nullable=false)
      */
     private $name;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="count", type="integer", nullable=false)
      */
     private $count;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $tasks;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tasks = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -97,13 +94,37 @@ class Boards implements EmberDataSerializableInterface
     }
 
     /**
-     * Get ember data serializer
+     * Add task
      *
-     * @return string
+     * @param \AppBundle\Entity\Tasks $task
+     *
+     * @return Boards
      */
-    public function getEmberDataSerializerAdapterServiceName()
+    public function addTask(\AppBundle\Entity\Tasks $task)
     {
-        return 'appbundle.ember_data_serializer_adapter.boards';
+        $this->tasks[] = $task;
+
+        return $this;
     }
 
+    /**
+     * Remove task
+     *
+     * @param \AppBundle\Entity\Tasks $task
+     */
+    public function removeTask(\AppBundle\Entity\Tasks $task)
+    {
+        $this->tasks->removeElement($task);
+    }
+
+    /**
+     * Get tasks
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTasks()
+    {
+        return $this->tasks;
+    }
 }
+

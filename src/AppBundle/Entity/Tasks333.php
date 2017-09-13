@@ -2,45 +2,70 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
+use UniqueLibs\EmberDataSerializerBundle\Interfaces\EmberDataSerializableInterface;
+
 /**
  * Tasks
+ *
+ * @ORM\Table(name="tasks", indexes={@ORM\Index(name="board_id", columns={"board_id"})})
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TasksRepository")
  */
-class Tasks
+class Tasks implements EmberDataSerializableInterface
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="task_name", type="string", length=45, nullable=false)
      */
     private $taskName;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="task_type", type="integer", nullable=false)
      */
     private $taskType;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=40, nullable=false)
      */
     private $title;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="intro_text", type="string", length=45, nullable=false)
      */
     private $introText;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="full_text", type="string", length=45, nullable=false)
      */
     private $fullText;
 
     /**
      * @var \AppBundle\Entity\Boards
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Boards", inversedBy="tasks")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
-    private $boards;
+    private $board;
+
 
 
     /**
@@ -180,9 +205,9 @@ class Tasks
      *
      * @return Tasks
      */
-    public function setBoard(\AppBundle\Entity\Boards $boards = null)
+    public function setBoard(\AppBundle\Entity\Boards $board = null)
     {
-        $this->boards = $boards;
+        $this->board = $board;
 
         return $this;
     }
@@ -194,7 +219,17 @@ class Tasks
      */
     public function getBoard()
     {
-        return $this->boards;
+        return $this->board;
     }
-}
 
+    /**
+     * Get ember data serializer
+     *
+     * @return string
+     */
+    public function getEmberDataSerializerAdapterServiceName()
+    {
+        return 'appbundle.ember_data_serializer_adapter.tasks';
+    }
+
+}

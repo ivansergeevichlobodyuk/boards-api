@@ -49,15 +49,14 @@ AppBundle\Entity\Tasks:
                 fixed: false
             column: full_text
     manyToOne:
-        board:
+        boards:
             targetEntity: Boards
             cascade: {  }
             fetch: LAZY
             mappedBy: null
-            inversedBy: null
+            inversedBy: tasks
             joinColumns:
                 board_id:
                     referencedColumnName: id
             orphanRemoval: false
     lifecycleCallbacks: {  }
-    repositoryClass: AppBundle\Repository\TasksRepository

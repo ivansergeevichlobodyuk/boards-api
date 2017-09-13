@@ -22,5 +22,16 @@ AppBundle\Entity\Boards:
             nullable: false
             options:
                 unsigned: false
+    oneToMany:
+        tasks:
+            targetEntity: Tasks
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: boards
+            inversedBy: null
+            joinColumns:
+                id:
+                    referencedColumnName: board_id
+            orphanRemoval: false
     lifecycleCallbacks: {  }
     repositoryClass: AppBundle\Repository\BoardsRepository
