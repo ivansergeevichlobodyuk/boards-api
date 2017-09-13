@@ -17,7 +17,7 @@ use FOS\RestBundle\View\View;
 use AppBundle\Entity\Boards;
 use AppBundle\Entity\EmberDataSerializerAdapter\BoardsAdapter;
 
-class BoardController extends Controller
+class BoardController extends FOSRestController
 {
 
     /**
@@ -57,18 +57,15 @@ class BoardController extends Controller
 //
 
 
-        echo "serialized Array <pre>";
-            print_r($serializedArray);
-        echo "</pre>";
-        die;
+
 
 //        $serialized = $emberDataSerializerManager->format($users, UserAdapter::MODEL_NAME_PLURAL);
 
-        if ($restresult === null) {
+        if ($serializedArray === null) {
             return new View("there are no users exist", Response::HTTP_NOT_FOUND);
         }
        // echo "<pre>"; print_r($restresult); die;
-        return $restresult;
+        return $serializedArray;
     }
 
     /**
