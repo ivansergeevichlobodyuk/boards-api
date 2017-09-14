@@ -1,11 +1,11 @@
 <?php
 
 namespace AppBundle\Entity;
-
+use UniqueLibs\EmberDataSerializerBundle\Interfaces\EmberDataSerializableInterface;
 /**
  * Tasks
  */
-class Tasks
+class Tasks implements EmberDataSerializableInterface
 {
     /**
      * @var integer
@@ -196,5 +196,17 @@ class Tasks
     {
         return $this->boards;
     }
+
+    /**
+     * Get ember data serializer
+     *
+     * @return string
+     */
+    public function getEmberDataSerializerAdapterServiceName()
+    {
+        return 'appbundle.ember_data_serializer_adapter.tasks';
+    }
+
+
 }
 

@@ -49,24 +49,17 @@ class BoardController extends FOSRestController
      */
     public function getBoards()
     {
-//        $restresult = $this->getDoctrine()->getRepository('AppBundle:Boards')->findAllBoards();
-        $restresult = $this->getDoctrine()->getRepository('AppBundle:Boards')->findAllBoards();
-        //echo "<pre>"; print_r($restresult); die;
+        $boardList = $this->getDoctrine()->getRepository('AppBundle:Boards')->findAllBoards();
+        $taskList =  $this->getDoctrine()->getRepository('AppBundle:Tasks')->findAll();
 
         $emberDataSerializerManager = $this->get('unique_libs.ember_data_serializer.manager');
-        $serializedArray = $emberDataSerializerManager->format($restresult, BoardsAdapter::MODEL_NAME_PLURAL);
-//
-
-
-
-
-//        $serialized = $emberDataSerializerManager->format($users, UserAdapter::MODEL_NAME_PLURAL);
-
-        if ($serializedArray === null) {
+        $serializedBoards = $emberDataSerializerManager->format($boardList, BoardsAdapter::MODEL_NAME_PLURAL);
+        $serializedTasks =  $emberDataSerializerManager->format($taskList, BoardsAdapter::MODEL_NAME_PLURAL );
+        if ($serializedBoards === null) {
             return new View("there are no users exist", Response::HTTP_NOT_FOUND);
         }
        // echo "<pre>"; print_r($restresult); die;
-        return $serializedArray;
+        return $serializedTasks;
     }
 
     /**

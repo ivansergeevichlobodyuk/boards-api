@@ -29,10 +29,14 @@ class TasksAdapter implements EmberDataSerializerAdapterInterface
      */
     public function getData(EmberDataSerializableInterface $object)
     {
-        /** @var User $object */
+        /** @var Tasks $object */
         return array(
             'id' => array($object->getId(), false),
-            'tasks' => array($object->getTaskName(), false),
+            'taskName' => array($object->getTaskName(), false),
+            'taskType' => array($object->getTaskType(), false),
+            'title' => array($object->getTitle(), false),
+            'introText' => array($object->getIntroText(), false),
+            'fullText' => array($object->getFullText(), false)
         );
     }
 

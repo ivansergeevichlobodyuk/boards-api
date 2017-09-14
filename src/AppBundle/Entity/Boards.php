@@ -128,13 +128,27 @@ class Boards implements EmberDataSerializableInterface
     }
 
     /**
- * Get ember data serializer
- *
- * @return string
- */
-public function getEmberDataSerializerAdapterServiceName()
-{
-    return 'appbundle.ember_data_serializer_adapter.boards';
-}
+     * Relations ids
+     *
+     * @return array
+     */
+    public function relationsIds(){
+        $ids = array();
+        foreach ( $this->tasks AS $task ){
+            $ids[] = $task->getId();
+        }
+        return $ids;
+    }
+
+
+    /**
+     * Get ember data serializer
+     *
+     * @return string
+     */
+    public function getEmberDataSerializerAdapterServiceName()
+    {
+        return 'appbundle.ember_data_serializer_adapter.boards';
+    }
 
 }
