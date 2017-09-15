@@ -1,9 +1,11 @@
 <?php
 
 namespace AppBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
 use UniqueLibs\EmberDataSerializerBundle\Interfaces\EmberDataSerializableInterface;
 /**
  * Tasks
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TasksRepository")
  */
 class Tasks implements EmberDataSerializableInterface
 {

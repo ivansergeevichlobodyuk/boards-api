@@ -36,7 +36,8 @@ class TasksAdapter implements EmberDataSerializerAdapterInterface
             'taskType' => array($object->getTaskType(), false),
             'title' => array($object->getTitle(), false),
             'introText' => array($object->getIntroText(), false),
-            'fullText' => array($object->getFullText(), false)
+            'fullText' => array($object->getFullText(), false),
+            'board' => array($object->getBoard()->getId(), false)
         );
     }
 

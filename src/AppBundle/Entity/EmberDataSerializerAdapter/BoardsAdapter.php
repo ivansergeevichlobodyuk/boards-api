@@ -6,6 +6,7 @@ use UniqueLibs\EmberDataSerializerBundle\Interfaces\EmberDataSerializableInterfa
 use UniqueLibs\EmberDataSerializerBundle\Interfaces\EmberDataSerializerAdapterInterface;
 use AppBundle\Entity\Boards;
 
+
 class BoardsAdapter implements EmberDataSerializerAdapterInterface
 {
     const MODEL_NAME_SINGULAR = 'board';
@@ -34,7 +35,7 @@ class BoardsAdapter implements EmberDataSerializerAdapterInterface
             'id' => array($object->getId(), false),
             'name' => array($object->getName(), false),
             'count' => array($object->getCount(), false),
-            'relations' => array($object->relationsIds(), false),
+            'task' => array($object->relationsIds(), false),
         );
     }
 
