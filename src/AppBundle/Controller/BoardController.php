@@ -62,6 +62,29 @@ class BoardController extends FOSRestController
     }
 
     /**
+     * Update board
+     *
+     * @Rest\Put("/api/boards/{boardId}")
+     * @return array
+     */
+    public function updateBoardById(Request $request, $boardId)
+    {
+        $content = json_decode($request->getContent(),true);
+        $boardItem = $this->getDoctrine()->getRepository('AppBundle:Boards')->find($boardId);
+        if ( $boardItem === null ){
+            $response = new  View("there are no board exist", Response::HTTP_NOT_FOUND);
+        }else{
+            $boardItem->setName($content['board']['name']);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($boardItem);
+            $em->flush();
+            $response = $boardItem;
+        }
+        return $response;
+    }
+
+
+    /**
      * @Rest\Get("/api/boards/{id}/")
      */
     public function getBoardById($id)
@@ -72,6 +95,10 @@ class BoardController extends FOSRestController
         }
         return $restresult;
     }
+
+
+
+
 
 
 
