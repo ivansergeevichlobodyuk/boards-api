@@ -71,14 +71,29 @@ class BoardController extends FOSRestController
     {
         $content = json_decode($request->getContent(),true);
         $boardItem = $this->getDoctrine()->getRepository('AppBundle:Boards')->find($boardId);
+        $validator = $this->get('validator');
         if ( $boardItem === null ){
             $response = new  View("there are no board exist", Response::HTTP_NOT_FOUND);
         }else{
             $boardItem->setName($content['board']['name']);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($boardItem);
-            $em->flush();
-            $response = $boardItem;
+            $errors = $validator->validate($boardItem);
+            if ( count($errors) > 0  ){
+                $error_data = array('errors' => array());
+
+                $c = 0;
+                foreach ($errors AS $error){
+                    $error_data['errors'][$c]['detail'] = $error->getMessage();
+                    $error_data['errors'][$c]['source'] = array( 'pointer' => "data/attributes/name" );
+                }
+
+                $response = new Response(json_encode($error_data),422);//$error_data;
+            }else{
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($boardItem);
+                $em->flush();
+                $data = array( 'board' => array( 'id' => $boardItem->getId(), 'name' => $boardItem->getName(), 'count' => $boardItem->getCount() ) );
+                $response = $data;
+            }
         }
         return $response;
     }

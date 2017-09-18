@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use UniqueLibs\EmberDataSerializerBundle\Interfaces\EmberDataSerializableInterface;
 /**
  * Tasks
@@ -16,26 +17,31 @@ class Tasks implements EmberDataSerializableInterface
 
     /**
      * @var string
+     * @Assert\NotBlank()
      */
     private $taskName;
 
     /**
      * @var integer
+     *
      */
     private $taskType;
 
     /**
      * @var string
+     * @Assert\NotBlank()
      */
     private $title;
 
     /**
      * @var string
+     * @Assert\NotBlank()
      */
     private $introText;
 
     /**
      * @var string
+     * @Assert\NotBlank()
      */
     private $fullText;
 

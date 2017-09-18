@@ -197,3 +197,4 @@
 [Fri Sep 15 12:55:30.977755 2017] [:error] [pid 13538] [client 127.0.0.1:33818] PHP Fatal error:  Cannot use object of type AppBundle\\Entity\\Tasks as array in /var/www/boards-api/vendor/uniquelibs/ember-data-serializer-bundle/Services/EmberDataSerializerManager.php on line 57
 [Fri Sep 15 12:56:23.818373 2017] [:error] [pid 13742] [client 127.0.0.1:34072] PHP Fatal error:  Call to a member function getId() on a non-object in /var/www/boards-api/src/AppBundle/Controller/TaskController.php on line 77
 [Fri Sep 15 12:56:43.937502 2017] [:error] [pid 13744] [client 127.0.0.1:34202] PHP Fatal error:  Call to a member function getId() on a non-object in /var/www/boards-api/src/AppBundle/Controller/TaskController.php on line 77
+[Sun Sep 17 22:17:01.816646 2017] [:error] [pid 6248] [client 127.0.0.1:47903] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /var/www/boards-api/src/AppBundle/Controller/BoardController.php on line 81

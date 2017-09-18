@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use UniqueLibs\EmberDataSerializerBundle\Interfaces\EmberDataSerializableInterface;
 /**
  * Boards
@@ -15,6 +16,7 @@ class Boards implements EmberDataSerializableInterface
 
     /**
      * @var string
+     * @Assert\NotBlank()
      */
     private $name;
 
