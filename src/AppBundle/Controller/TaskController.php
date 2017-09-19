@@ -42,30 +42,36 @@ class TaskController extends FOSRestController
         $task = new Tasks();
         $boards = new Boards();
         $content = json_decode($request->getContent(),true);
-
-        $board = $this->getDoctrine()->getRepository('AppBundle:Boards')->find($content['task']['board']);
-
-        $task->setBoard($board);
-        $task->setTaskName($content['task']['taskName']);
-        $task->setFullText($content['task']['taskName']);
-        $task->setIntroText($content['task']['taskName']);
-        $task->setTaskType($content['task']['taskName']);
-        $task->setTitle($content['task']['taskName']);
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($task);
-        $em->flush();
-        return array('task' => array('id' => $task->getId(),'taskName' => $task->getTaskName() ));
+        return $this->_writeTaskData($task, $content);
     }
 
     /**
-     * Write task data
+     * Updates task
      *
+     * @param Request $request
+     * @param $taskId
+     * @Rest\Put("/api/tasks/{taskId}")
+     * @return array
+     */
+    public function updateTask(Request $request,$taskId ){
+
+        $task = $this->getDoctrine()->getRepository('AppBundle:Tasks')
+            ->find($taskId);
+        $data = (array)json_decode($request->getContent());
+
+        $data['task'] = (array)$data['task'];
+        return $this->_writeTaskData( $task, $data );
+    }
+
+
+    /**
      * @param Tasks $task
      * @param array $data
+     * @return array
      */
     private function _writeTaskData(Tasks $task, array $data){
         $board = $this->getDoctrine()->getRepository('AppBundle:Boards')->find($data['task']['board']);
+        $validator = $this->get('validator');
 
         $task->setBoard($board);
         $task->setTaskName($data['task']['taskName']);
@@ -74,26 +80,27 @@ class TaskController extends FOSRestController
         $task->setTaskType($data['task']['taskName']);
         $task->setTitle($data['task']['taskName']);
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($task);
-        $em->flush();
-        return array('task' => array('id' => $task->getId(),'taskName' => $task->getTaskName() ));
+        $errors = $validator->validate($task);
+        if ( count($errors) > 0  ){
+            $error_data = array('errors' => array());
+            $c = 0;
 
+            foreach ($errors AS $error){
+                $error_data['errors'][$c]['detail'] = $error->getMessage();
+                $error_data['errors'][$c]['source'] = array( 'pointer' => $error->getPropertyPath() );
+                $c++;
+            }
+            $response = new Response(json_encode($error_data),422);
+        }else{
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($task);
+            $em->flush();
+            $response = array('task' => array('id' => $task->getId(),'taskName' => $task->getTaskName() ));
+        }
+        return $response;
     }
 
-    /**
-     * Updates task
-     *
-     * @param $taskId
-     * @Rest\Put("/api/tasks/{taskId}")
-     * @return array
-     */
-    public function updateTask($taskId, Request $request){
-        $task = $this->getDoctrine()->getRepository('AppBundle:Tasks')
-            ->find($taskId);
-        $content = json_decode($request->getContent(),true);
-        return $this->_writeTaskData( $task, $content );
-    }
+
 
     /**
      * Gets task on board id

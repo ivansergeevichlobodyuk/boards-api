@@ -85,7 +85,6 @@ class BoardController extends FOSRestController
                     $error_data['errors'][$c]['detail'] = $error->getMessage();
                     $error_data['errors'][$c]['source'] = array( 'pointer' => "data/attributes/name" );
                 }
-
                 $response = new Response(json_encode($error_data),422);//$error_data;
             }else{
                 $em = $this->getDoctrine()->getManager();
